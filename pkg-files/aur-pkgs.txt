@@ -1,22 +1,6 @@
---END OF MINIMAL INSTALL--
-autojump
-brave-bin
-bridge-utils
-dxvk-bin
-github-desktop-bin
-lightly-git
-lightlyshaders-git
-mangohud
-mangohud-common
-nerd-fonts-fira-code
-nordic-darker-standard-buttons-theme
-nordic-darker-theme
-nordic-kde-git
-nordic-theme
-ocs-url
-plymouth-git
-sddm-nordic-theme-git
+snap-pac-grub
+snapd
 snapper-gui-git
-ttf-meslo
-vde2
-zoom
+ttf-meslo-nerd-font-powerlevel10k
+gdm-plymouth-prime
+--END OF MINIMAL INSTALL--
