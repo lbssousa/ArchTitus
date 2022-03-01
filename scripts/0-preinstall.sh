@@ -72,15 +72,35 @@ echo -ne "
 createsubvolumes () {
     btrfs subvolume create /mnt/@
     btrfs subvolume create /mnt/@home
-    btrfs subvolume create /mnt/@var
-    btrfs subvolume create /mnt/@tmp
+    btrfs subvolume create /mnt/@root
+    btrfs subvolume create /mnt/@opt
+    btrfs subvolume create /mnt/@log
+    btrfs subvolume create /mnt/@pkg
+    btrfs subvolume create /mnt/@flatpak
+    btrfs subvolume create /mnt/@machines
+    btrfs subvolume create /mnt/@portables
+    btrfs subvolume create /mnt/@libvirt
+    btrfs subvolume create /mnt/@containers
+    btrfs subvolume create /mnt/@docker
+    btrfs subvolume create /mnt/@srv
+    btrfs subvolume create /mnt/@local
     btrfs subvolume create /mnt/@.snapshots
 }
 
 mountallsubvol () {
     mount -o ${MOUNT_OPTIONS},subvol=@home ${partition3} /mnt/home
-    mount -o ${MOUNT_OPTIONS},subvol=@tmp ${partition3} /mnt/tmp
-    mount -o ${MOUNT_OPTIONS},subvol=@var ${partition3} /mnt/var
+    mount -o ${MOUNT_OPTIONS},subvol=@root ${partition3} /mnt/root
+    mount -o ${MOUNT_OPTIONS},subvol=@opt ${partition3} /mnt/opt
+    mount -o ${MOUNT_OPTIONS},subvol=@log ${partition3} /mnt/var/log
+    mount -o ${MOUNT_OPTIONS},subvol=@pkg ${partition3} /mnt/var/cache/pacman/pkg
+    mount -o ${MOUNT_OPTIONS},subvol=@flatpak ${partition3} /mnt/var/lib/flatpak
+    mount -o ${MOUNT_OPTIONS},subvol=@machines ${partition3} /mnt/var/lib/machines
+    mount -o ${MOUNT_OPTIONS},subvol=@portables ${partition3} /mnt/var/lib/portables
+    mount -o ${MOUNT_OPTIONS},subvol=@libvirt ${partition3} /mnt/var/lib/libvirt
+    mount -o ${MOUNT_OPTIONS},subvol=@containers ${partition3} /mnt/var/lib/containers
+    mount -o ${MOUNT_OPTIONS},subvol=@docker ${partition3} /mnt/var/lib/docker
+    mount -o ${MOUNT_OPTIONS},subvol=@srv ${partition3} /mnt/srv
+    mount -o ${MOUNT_OPTIONS},subvol=@local ${partition3} /mnt/usr/local
     mount -o ${MOUNT_OPTIONS},subvol=@.snapshots ${partition3} /mnt/.snapshots
 }
 
@@ -92,7 +112,7 @@ subvolumesetup () {
 # mount @ subvolume
     mount -o ${MOUNT_OPTIONS},subvol=@ ${partition3} /mnt
 # make directories home, .snapshots, var, tmp
-    mkdir -p /mnt/{home,var,tmp,.snapshots}
+    mkdir -p /mnt/{home,root,opt,var/{log,cache/pacman/pkg,lib/{flatpak,machines,portables,libvirt,containers,docker}},srv,usr/local,.snapshots}
 # mount subvolumes
     mountallsubvol
 }
